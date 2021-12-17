@@ -1,0 +1,45 @@
+
+
+
+
+server:
+  port: 8888
+  address: localhost
+#  servlet:
+#    context-path: /api/
+#  servlet:
+#  address: 101.37.163.78
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 2MB
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+      #    配置德鲁伊数据源熟悉
+    druid:
+      stat-view-servlet:
+        enabled: false
+        login-username: admin
+        login-password: 123
+      web-stat-filter:
+        enabled: false
+# 配置redis数据库
+  redis:
+    host: localhost
+    port: 6379
+mybatis-plus:
+  configuration:
+    log-impl:
+      org.apache.ibatis.logging.stdout.StdOutImpl
+  #    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      table-prefix: ton_
+#  config-location: classpath:mybatis/*.xml
+  mapper-locations: classpath*:com/tonpower/springbootweb/dao/*.xml
+
+

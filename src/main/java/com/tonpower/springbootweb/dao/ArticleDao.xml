@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tonpower.springbootweb.dao.ArticleDao">
+
+
+    <select id="findArticlesById" parameterType="int" resultType="com.tonpower.springbootweb.domain.Article">
+        select id,title from ton_article group by id order by view_counts desc limit #{limit}
+    </select>
+    <select id="listArchives" resultType="com.tonpower.springbootweb.domain.dos.Archives">
+        select year(FROM_UNIXTIME(create_date/1000)) year,month(FROM_UNIXTIME(create_date/1000)) month, count(*) count from ton_article group by year,month
+    </select>
+    <select id="listArticle" resultType="com.tonpower.springbootweb.domain.Article">
+        select * from ton_article
+        <where>
+            1 = 1
+<!--            <if test="categoryId != null">-->
+<!--                and  category_id = #{categoryId}-->
+<!--            </if>-->
+            <if test="year != null and year.length>0 and month != null and month.length>0">
+                and ( FROM_UNIXTIME(create_date/1000,'%Y') = #{year} and FROM_UNIXTIME(create_date/1000,'%m') = #{month} )
+            </if>
+<!--            <if test="tagId != null">-->
+<!--                and id in (select article_id from ms_article_tag where tag_id=#{tagId})-->
+<!--            </if>-->
+        </where>
+        order by create_date desc
+    </select>
+</mapper>
