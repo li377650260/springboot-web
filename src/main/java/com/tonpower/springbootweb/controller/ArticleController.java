@@ -58,7 +58,6 @@ public class ArticleController {
     public Result newArticles(){
         Result hots;
         int limit = 3;
-        // 业务层查询最热文章列表
         List<ArticleVo> articles = articleService.newArticles(limit);
         hots = Result.success(articles);
         return hots;
