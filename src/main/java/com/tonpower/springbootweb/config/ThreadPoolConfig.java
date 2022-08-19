@@ -20,7 +20,7 @@ public class ThreadPoolConfig {
     @Bean
     public Executor asyncServiceExecutor(){
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        // 设置核心线程输
+        // 设置核心线程数
         executor.setCorePoolSize(5);
         // 设置最大线程数
         executor.setMaxPoolSize(20);
